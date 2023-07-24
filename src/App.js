@@ -52,6 +52,7 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 const apiKey = "e28b7991";
+const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`;
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -85,10 +86,7 @@ export default function App() {
         try {
           setIsLoading(true);
           setError("");
-          const res = await fetch(
-            `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`,
-            { signal: controller.signal }
-          );
+          const res = await fetch(api, { signal: controller.signal });
           if (!res.ok)
             throw new Error("Something went wrong with fetching movies");
 
@@ -318,9 +316,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     function () {
       async function getMovieDetails() {
         setIsLoading(true);
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${apiKey}&i=${selectedId}`
-        );
+        const res = await fetch(api);
         const data = await res.json();
         setMovie(data);
         setIsLoading(false);
