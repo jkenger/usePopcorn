@@ -313,12 +313,13 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 
   useEffect(
     function () {
-      const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${selectedId}`;
+      const api = `https://www.omdbapi.com/?apikey=${apiKey}&i=${selectedId}`;
 
       async function getMovieDetails() {
         setIsLoading(true);
         const res = await fetch(api);
         const data = await res.json();
+        console.log(data);
         setMovie(data);
         setIsLoading(false);
       }
