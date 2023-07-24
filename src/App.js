@@ -52,7 +52,6 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 const apiKey = "e28b7991";
-const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`;
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -61,7 +60,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-
+  const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`;
   function handleSelectMovie(value) {
     setSelectedId((selectedId) => (value === selectedId ? null : value));
   }
