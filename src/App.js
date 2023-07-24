@@ -60,7 +60,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`;
+
   function handleSelectMovie(value) {
     setSelectedId((selectedId) => (value === selectedId ? null : value));
   }
@@ -80,7 +80,7 @@ export default function App() {
   useEffect(
     function () {
       const controller = new AbortController();
-
+      const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`;
       async function fetchMovies() {
         try {
           setIsLoading(true);
@@ -259,8 +259,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(null);
 
-  const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${selectedId}`;
-
   const isWatched = watched.map((movie) =>
     movie.imdbID.includes(selectedId)
   )[0];
@@ -315,6 +313,8 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 
   useEffect(
     function () {
+      const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${selectedId}`;
+
       async function getMovieDetails() {
         setIsLoading(true);
         const res = await fetch(api);
@@ -324,7 +324,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
       }
       getMovieDetails();
     },
-    [api]
+    [selectedId]
   );
 
   useEffect(
