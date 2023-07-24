@@ -97,8 +97,6 @@ export default function App() {
           setMovies(data.Search);
           setError("");
         } catch (err) {
-          console.error(err.message);
-
           if (err.name !== "AbortError") setError(err.message);
         } finally {
           setIsLoading(false);
@@ -319,7 +317,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
         setIsLoading(true);
         const res = await fetch(api);
         const data = await res.json();
-        console.log(data);
         setMovie(data);
         setIsLoading(false);
       }
