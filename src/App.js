@@ -258,7 +258,9 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(null);
-  const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`;
+
+  const api = `https://www.omdbapi.com/?apikey=${apiKey}&s=${selectedId}`;
+
   const isWatched = watched.map((movie) =>
     movie.imdbID.includes(selectedId)
   )[0];
